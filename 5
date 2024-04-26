@@ -9,10 +9,6 @@ class MainScreen(Screen):
    def __init__(self, **kwargs):
        super(MainScreen, self).__init__(**kwargs)
        layout = BoxLayout(orientation='vertical')
-       spinner = Spinner(text='Виберіть елемент', values=('Елемент 1', 'Елемент 2', 'Елемент 3'))
-       layout.add_widget(spinner)
-       switch = Switch(active=False)
-       layout.add_widget(switch)
        button1 = Button(text='Екран 1')
        button1.bind(on_press=self.change_screen)
        layout.add_widget(button1)
@@ -37,23 +33,8 @@ class OtherScreen(Screen):
        layout = BoxLayout(orientation='vertical')
        button_back = Button(text='На головний екран')
        button_back.bind(on_press=self.back_to_main_screen)
+       switch = Switch(active=False)
+       layout.add_widget(switch)
        layout.add_widget(button_back)
-       self.add_widget(layout)
-
-   def back_to_main_screen(self, instance):
-       self.manager.current = 'main'
-
-class MyApp(App):
-   def build(self):
-       screen_manager = ScreenManager()
-       main_screen = MainScreen(name='main')
-       screen_manager.add_widget(main_screen)
-
-       for i in range(1, 5):
-           screen = OtherScreen(name=f'Екран {i}')
-           screen_manager.add_widget(screen)
-
-       return screen_manager
-
-if __name__ == '__main__':
-   MyApp().run()
+       spinner = Spinner(text='Виберіть елемент', values=('Елемент 1', 'Елемент 2', 'Елемент 3'))
+       layout.add_widget(spinner)
